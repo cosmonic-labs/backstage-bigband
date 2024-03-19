@@ -81,12 +81,14 @@ npm run build
 If you wanted to build the example backend of the examples from source, you could run the following command to use the local build:
 
 ```console
+export WASM_BINARY_PATH=$(realpath ../../examples/rust/frontend-plugin/target/wasm32-wasi/debug/backstage_rust_frontend_plugin.wasm)
+export BACKSTAGE_DIR=/path/to/your/backstage/dir
 node dist/index.mjs generate \
     --plugin-type frontend \
     --plugin-id example-frontend \
-    --wasm-binary $(realpath ../../examples/rust/frontend-plugin/target/wasm32-wasi/debug/backstage_rust_frontend_plugin.wasm) \
+    --wasm-binary $WASM_BINARY_PATH \
     --output-dir /tmp/output-frontend \
-    --backstage-dir /path/to/your/local/backend/repository
+    --backstage-dir $BACKSTAGE_DIR
 ```
 
 > [!WARNING]
@@ -95,10 +97,12 @@ node dist/index.mjs generate \
 To run the *backend* example, you can run a similar command, pointing at a separately built binary:
 
 ```console
+export WASM_BINARY_PATH=$(realpath ../../examples/rust/backend-plugin/target/wasm32-wasi/debug/backstage_rust_backend_plugin.wasm)
+export BACKSTAGE_DIR=/path/to/your/backstage/dir
 node dist/index.mjs generate \
     --plugin-type backend \
     --plugin-id example-backend \
-    --wasm-binary $(realpath ../../examples/rust/backend-plugin/target/wasm32-wasi/debug/backstage_rust_backend_plugin.wasm) \
+    --wasm-binary $WASM_BINARY_PATH \
     --output-dir /tmp/output-backend \
-    --backstage-dir /path/to/your/local/backend/repository
+    --backstage-dir $BACKSTAGE_DIR
 ```

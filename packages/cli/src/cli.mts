@@ -109,7 +109,10 @@ export async function buildProgram(): Promise<Command> {
       console.log(`${chalk.cyan("[info]")} Transpiling WASM binary into JS...`);
       const transpiled = await jco.transpile(wasmBytes, {
         name: "component",
-        tlaCompat: true,
+        // Only backend plugins need the Top Level Await compatibility hack
+        // since the environment inside Backstage is bit more restrictive build-wise.
+        // (in particular, esbuild doesn't support some top level await w/ `cjs` output)
+        tlaCompat: pluginType === 'backend',
       });
       console.log(
         `${chalk.green("[success]")} Successfully transpiled WASM binary `

@@ -72,12 +72,14 @@ export async function build(
     await fs.move(jsEntrypointPath, mjsEntrypointPath);
     entrypointPath = mjsEntrypointPath;
   }
+
   console.log(
-    `${chalk.cyan("[info]")} Importing transpiled JS @ [${entrypointPath}]...`
+    `${chalk.cyan("[info]")} Importing & initializing transpiled JS @ [${entrypointPath}]...`
   );
-
   const wasmModule: BackstageBackendWasmModule = await import(entrypointPath);
-
+  console.log(
+    `${chalk.green("[success]")} Import & initialization complete `
+  );
 
   // Pull together data needed for templating
   const templateData = {

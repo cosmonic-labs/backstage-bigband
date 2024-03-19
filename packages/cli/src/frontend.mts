@@ -81,11 +81,14 @@ export async function build(
     await fs.move(jsEntrypointPath, mjsEntrypointPath);
     entrypointPath = mjsEntrypointPath;
   }
+
   console.log(
     `${chalk.cyan("[info]")} Importing transpiled JS @ [${entrypointPath}]...`
   );
-
   const wasmModule: BackstageFrontendWasmModule = await import(entrypointPath);
+  console.log(
+    `${chalk.green("[success]")} Import & initialization complete `
+  );
 
   // Install all required dependencies noted by the WebAssembly module
   const deps = wasmModule.backstageFrontendPlugin.getNodeDeps();
