@@ -16,7 +16,7 @@ This plugin works by taking in a [WebAssembly][wasm] binary file compiled from y
 First, install the `bigband-cli` CLI into your javascript project:
 
 ```console
-npm install -D backstage-bigband-cli
+npm install -D bigband-cli
 ```
 
 > [!NOTE]
