@@ -6,6 +6,10 @@ This experimental new technique relies on new standards and advanced features of
 
 [wasm]: https://webassembly.org
 
+## 🎤 Looking for the BackstageCon 2024 slides?
+
+Enjoyed the talk at BackstageCon 2024? [Download the slides here](./docs/pdf/backstagecon-2024-assembling-a-bigger-band.pdf)
+
 # Dependencies
 
 For the CLI, you'll need:
