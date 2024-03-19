@@ -319,4 +319,7 @@ export async function postInstallSetup(backstageDir: string, pluginID: string, p
     updatedAppTsxContents += line + "\n";
   }
   await fs.writeFile(appTsxPath, updatedAppTsxContents);
+  console.log(
+    `${chalk.green("[success]")} Successfully modified App.tsx `
+  );
 }
