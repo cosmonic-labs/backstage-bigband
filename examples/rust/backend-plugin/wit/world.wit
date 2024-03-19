@@ -1,0 +1,6 @@
+package component:backstage-rust-plugin;
+
+world plugin {
+    export backstage-backend-plugin;
+    export wasi:http/incoming-handler@0.2.0;
+}

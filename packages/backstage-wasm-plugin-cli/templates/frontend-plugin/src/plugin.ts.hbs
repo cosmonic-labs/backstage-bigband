@@ -1,0 +1,28 @@
+import {
+  createPlugin,
+  createRoutableExtension,
+  createRouteRef,
+} from '@backstage/core-plugin-api';
+
+export const rootRouteRef = createRouteRef({
+  id: '{{pluginID}}',
+});
+
+export const {{pluginObjectName}} = createPlugin({
+  id: '{{pluginID}}',
+  routes: {
+    root: rootRouteRef,
+  },
+});
+
+export const {{pluginPageClassName}} = {{pluginObjectName}}.provide(
+  createRoutableExtension({
+    name: '{{pluginPageClassName}}',
+    component: async () => {
+      // Import the root component itself
+      let m = await import('./components/{{rootComponentSubPath}}');
+      return m.default ?? m.{{pluginRootComponentClassName}};
+    },
+    mountPoint: rootRouteRef,
+  }),
+);

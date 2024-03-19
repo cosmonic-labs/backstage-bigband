@@ -1,0 +1,43 @@
+{
+  "name": "bigband-cli",
+  "version": "0.1.0",
+  "description": "A CLI for creating WebAssembly-powered Backstage plugins",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": "https://github.com/vados-cosmonic/bigband-cli",
+  "author": "Victor Adossi <vadossi@cosmonic.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "lint": "eslint",
+    "build:frontend-js-bindings": "npx jco transpile wit/backstage-frontend-plugin.wit --no-namespaced-exports --stub -o types/backstage-frontend-plugin",
+    "build:backend-js-bindings": "npx jco transpile wit/backstage-backend-plugin.wit --tla-compat --no-namespaced-exports --stub -o types/backstage-backend-plugin",
+    "build": "npm run build:frontend-js-bindings && npm run build:backend-js-bindings && npm run build:tsc",
+    "build:tsc": "tsc",
+    "watch:tsc": "tsc -w",
+    "start": "node dist/index.mjs"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.11.10",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@bytecodealliance/jco": "^1.0.3",
+    "@bytecodealliance/preview2-shim": "^0.16.0",
+    "@financial-times/package-json": "^4.0.0",
+    "chalk": "^5.3.0",
+    "change-case": "^5.4.2",
+    "commander": "^11.1.0",
+    "execa": "^8.0.1",
+    "fs-extra": "^11.2.0",
+    "handlebars": "^4.7.8"
+  }
+}

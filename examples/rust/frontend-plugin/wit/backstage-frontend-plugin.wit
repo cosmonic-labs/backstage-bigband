@@ -1,0 +1,34 @@
+interface backstage-frontend-plugin {
+  /// A representation of a node dependency (one that might be installed via `npm install`/`yarn add`)
+  record node-dependency {
+    /// Name of the dependency (ex. 'react')
+    name: string,
+    /// Version of the dependency
+    version: option<string>,
+    /// Whether this is a development-only dependency
+    dev: bool,
+  }
+
+  // Get node dependencies that need to be installed
+  get-node-deps: func() -> result<list<node-dependency>, string>;
+
+  /// Files that make up React components to be used in in the frontend plugin
+  record component-file {
+    /// Path to the component file from the (root: `<project>/src/components`)
+    /// ex. MyComponent/
+    path: string,
+
+    /// Whether this component is the root component for the plugin
+    is-root: bool,
+
+    /// Name of the component (used if this file represents a React component)
+    /// This should be specified if is_root is specified
+    component-class-name: option<string>,
+
+    /// Contents of the
+    contents: string,
+  }
+
+  /// Get the files that make up the frontend of the component
+  get-component-files: func() -> result<list<component-file>, string>;
+}

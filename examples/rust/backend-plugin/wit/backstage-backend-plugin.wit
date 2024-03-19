@@ -1,0 +1,12 @@
+interface backstage-backend-plugin {
+  record route {
+    /// HTTP method that the route
+    method: string,
+
+    /// Path to the route
+    path: string,
+  }
+
+  /// Get the routes that the backend will be expected to serve
+  get-routes: func() -> result<list<route>, string>;
+}

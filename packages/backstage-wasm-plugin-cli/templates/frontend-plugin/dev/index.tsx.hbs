@@ -1,0 +1,12 @@
+import React from 'react';
+import { createDevApp } from '@backstage/dev-utils';
+import { {{pluginObjectName}}, {{pluginPageClassName}} } from '../src/plugin';
+
+createDevApp()
+  .registerPlugin({{pluginObjectName}})
+  .addPage({
+    element: <{{pluginPageClassName}} />,
+    title: 'Root Page',
+    path: '/{{pluginID}}'
+  })
+  .render();

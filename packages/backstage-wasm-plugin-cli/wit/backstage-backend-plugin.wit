@@ -1,0 +1,22 @@
+package backstage:plugins;
+
+interface backstage-backend-plugin {
+  record route {
+    /// HTTP method that the route
+    method: string,
+
+    /// Path to the route
+    path: string,
+  }
+
+  /// Get the routes that the backend will be expected to serve
+  get-routes: func() -> result<list<route>, string>;
+}
+
+world plugin {
+    export backstage-backend-plugin;
+
+    /// NOTE: while the real contract includes this export,
+    /// we exclude it here since jco does not seem to map exports yet
+    /// export wasi:http/incoming-handler@0.2.0;
+}

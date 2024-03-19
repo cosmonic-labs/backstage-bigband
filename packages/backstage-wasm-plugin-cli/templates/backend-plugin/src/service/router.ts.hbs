@@ -1,0 +1,41 @@
+import getPort from 'get-port';
+import httpProxy from 'express-http-proxy';
+import { errorHandler } from '@backstage/backend-common';
+import express from 'express';
+import Router from 'express-promise-router';
+import { Logger } from 'winston';
+
+import { incomingHandler } from "../wasm/transpiled/component.mjs";
+import { HTTPServer } from '@bytecodealliance/preview2-shim/http';
+
+export interface RouterOptions {
+  logger: Logger;
+}
+
+const DEFAULT_HOST = "127.0.0.1";
+
+export async function createRouter(
+  options: RouterOptions,
+): Promise<express.Router> {
+  const { logger } = options;
+
+  // Build & start a HTTP server that runs the code in the transpiled WebAssembly module
+  const server = new HTTPServer(incomingHandler);
+  const port = await getPort();
+  server.listen(port, DEFAULT_HOST);
+  const serverURL = `${DEFAULT_HOST}:${port}`;
+
+  const router = Router();
+  router.use(express.json());
+
+  // Add a _meta endpoint to get some information about the plugin
+  router.get('/_meta', (_, response) => {
+    response.json({ status: 'ok', data: { pluginId: "{{ pluginID }}" } });
+  });
+
+  // Proxy all other requests to the WebAssembly backend
+  router.all('*', await httpProxy(serverURL));
+
+  router.use(errorHandler());
+  return router;
+}

@@ -1,0 +1,5 @@
+package component:backstage-rust-plugin;
+
+world plugin {
+    export backstage-frontend-plugin;
+}

@@ -1,0 +1,19 @@
+[package]
+name = "backstage-rust-backend-plugin"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wit-bindgen-rt = { version = "0.22.0", default-features = false }
+
+[package.metadata.component.target.dependencies]
+"wasi:sockets" = { path = "wit/deps/sockets" }
+"wasi:filesystem" = { path = "wit/deps/filesystem" }
+"wasi:clocks" = { path = "wit/deps/clocks" }
+"wasi:io" = { path = "wit/deps/io" }
+"wasi:cli" = { path = "wit/deps/cli" }
+"wasi:random" = { path = "wit/deps/random" }
+"wasi:http" = { path = "wit/deps/http" }
