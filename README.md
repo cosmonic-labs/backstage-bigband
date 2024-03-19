@@ -6,6 +6,12 @@ This experimental new technique relies on new standards and advanced features of
 
 [wasm]: https://webassembly.org
 
+# Dependencies
+
+For the CLI, you'll need:
+- [`node`](https://nodejs.org)
+- [`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
 ## How it works
 
 Assuming your favorite language (referred to as `$LANGUAGE`) has support for WebAssembly along with [WASI][wasi] preview1 (for example, in Rust this means the `wasm32-wasi` compilation target), you can build a WebAssembly binary that fulfills the WIT contract for the kind of plugin you care about. 
