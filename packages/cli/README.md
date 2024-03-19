@@ -75,3 +75,30 @@ To build the code in this repository:
 ```console
 npm run build
 ```
+
+## Run from source
+
+If you wanted to build the example backend of the examples from source, you could run the following command to use the local build:
+
+```console
+node dist/index.mjs generate \
+    --plugin-type frontend \
+    --plugin-id example-frontend \
+    --wasm-binary $(realpath ../../examples/rust/frontend-plugin/target/wasm32-wasi/debug/backstage_rust_frontend_plugin.wasm) \
+    --output-dir /tmp/output-frontend \
+    --backstage-dir /path/to/your/local/backend/repository
+```
+
+> [!WARNING]
+> Note that the code above uses *debug* builds of the binaries -- you may want to use release builds for smaller and faster binaries
+
+To run the *backend* example, you can run a similar command, pointing at a separately built binary:
+
+```console
+node dist/index.mjs generate \
+    --plugin-type backend \
+    --plugin-id example-backend \
+    --wasm-binary $(realpath ../../examples/rust/backend-plugin/target/wasm32-wasi/debug/backstage_rust_backend_plugin.wasm) \
+    --output-dir /tmp/output-backend \
+    --backstage-dir /path/to/your/local/backend/repository
+```
